@@ -1,0 +1,26 @@
+{
+  "user_id_path": "/home/heek/aigs/InitGrounder/data/amazon/f_usr_id.json",
+  "review_dir": "/home/heek/aigs/InitGrounder/data/amazon",
+  "out_root": "data/amazon/inter_cdr",
+  "domains": [
+    "Home_and_Kitchen",
+    "Electronics"
+  ],
+  "users": 3000,
+  "items_per_domain": {
+    "Home_and_Kitchen": 41138,
+    "Electronics": 35002
+  },
+  "splits": {
+    "Home_and_Kitchen": {
+      "train": 51141,
+      "valid": 3000,
+      "test": 3000
+    },
+    "Electronics": {
+      "train": 49525,
+      "valid": 3000,
+      "test": 3000
+    }
+  }
+}
