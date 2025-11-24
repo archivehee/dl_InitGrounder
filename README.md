@@ -1,6 +1,6 @@
-[2025.11] DL Short Project
+[2025.11] Principles of Deep Learning - Short Project
 
-InitGrounder 
+"InitGrounder" 
 
 Online User Cold-Start Recommendation with Popularity-Aware Learning
 
