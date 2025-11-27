@@ -38,9 +38,9 @@ def get_embedding(text):
 
     payload = {
         "model": EMB_MODEL,
-        "texts": [text],             # ✅ 필드 이름: texts
-        "dimensionality": 64,        # ✅ 필드 이름: dimensionality
-        # "task_type": "search_document",  # 필요하면 명시
+        "texts": [text],             
+        "dimensionality": 64,        
+        # "task_type": "search_document",  
     }
 
     resp = requests.post(NOMIC_ENDPOINT, headers=headers, json=payload)
@@ -51,7 +51,6 @@ def get_embedding(text):
         )
 
     data = resp.json()
-    # 응답 형태: {"embeddings": [[...], ...], "usage": {...}, "model": "..."}
     emb = np.array(data["embeddings"][0], dtype=np.float32)
     return emb
 
