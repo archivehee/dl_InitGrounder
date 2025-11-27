@@ -3,7 +3,6 @@ import json
 import random
 from tqdm import tqdm
 
-# ===== 설정 =====
 BASE_DIR = "/home/heek/edda_backbone/preprocess_raw/amazon/23"
 REVIEW_DIR = os.path.join(BASE_DIR, "user_reviews/5_core")
 META_DIR = os.path.join(BASE_DIR, "item_meta")
@@ -18,17 +17,14 @@ REQUIRED_FIELDS = ["main_category", "categories", "title", "description"]
 MAX_USERS = 3000
 MIN_INTERACTIONS_PER_DOMAIN = 5
 
-# ===== 유효성 검사 함수 =====
 def is_valid_field(value):
     if value in [None, "", [], {}, "null"]:
         return False
 
-    # 문자열 처리
     str_val = str(value).strip().lower()
     if str_val in ["", "[]", "{}", "none", "null", "[ ]"]:
         return False
 
-    # 문자열로 된 리스트인 척 하는 경우도 체크
     if str_val.startswith("[") and str_val.endswith("]"):
         try:
             parsed = json.loads(str_val.replace("'", '"'))
@@ -37,13 +33,11 @@ def is_valid_field(value):
         except:
             pass
 
-    # 실제 list 객체
     if isinstance(value, list) and all(str(v).strip().lower() in ["", "none", "null"] for v in value):
         return False
 
     return True
 
-# ===== 1. 메타데이터 기준 유효 asin 추출 =====
 domain_valid_asins = {}
 
 for domain in REQUIRED_DOMAINS:
@@ -60,7 +54,6 @@ for domain in REQUIRED_DOMAINS:
                 continue
     domain_valid_asins[domain] = valid_asins
 
-# ===== 2. 도메인별 유효 asin 기반 리뷰 유저 수집 =====
 domain_user_valid_reviews = {domain: {} for domain in REQUIRED_DOMAINS}
 
 for domain in REQUIRED_DOMAINS:
@@ -80,11 +73,9 @@ for domain in REQUIRED_DOMAINS:
                 continue
 
 
-# ===== 3. 모든 도메인에 등장하는 유저만 필터링 =====
 candidate_users = set.intersection(*[set(users.keys()) for users in domain_user_valid_reviews.values()])
 print(f"Valid overlapping users with meta-based 2 non-empty fields in all 2 domains: {len(candidate_users)}")
 
-# ===== 4. 최소 인터랙션 조건 만족 유저만 필터링 =====
 qualified_users = [
     user_id
     for user_id in candidate_users
@@ -101,11 +92,9 @@ if len(qualified_users) < MAX_USERS:
         f"required {MAX_USERS}, available {len(qualified_users)}"
     )
 
-# ===== 4. 랜덤 샘플링 =====
 random.seed(2025)
 sampled_users = random.sample(qualified_users, MAX_USERS)
 
-# ===== 5. 저장 =====
 os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
 with open(OUTPUT_PATH, "w") as f:
     json.dump([{"user_id": uid} for uid in sampled_users], f, indent=2)
