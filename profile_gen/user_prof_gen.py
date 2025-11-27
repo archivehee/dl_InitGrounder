@@ -1,6 +1,4 @@
-# ==================================
 # 0. Import & Configuration
-# ==================================
 import os
 import json
 import random
@@ -38,9 +36,7 @@ MAX_LEN_PER_DOMAIN = 5
 MAX_META_CHARS = 300
 
 
-# ==================================
 # 1. Prompt Template
-# ==================================
 BASE_PROMPT = """<user profile sentence generation>
 
 You are an assistant that generates a natural language profile for a user based on their interaction history with items. Your goal is to infer what kinds of items this user typically prefers and describe that in 2 coherent and expressive sentences.
@@ -66,9 +62,7 @@ Important Notes:
 """
 
 
-# ==================================
 # JSON Extraction Utility for DeepSeek-style output
-# ==================================
 def extract_json_block(text: str):
     """
     Extracts the JSON block from DeepSeek-R1 style output
@@ -97,9 +91,7 @@ def extract_json_block(text: str):
     return None
 
 
-# ==================================
 # 2. Utility Functions
-# ==================================
 def load_id_map(path):
     idx2raw = {}
     with open(path, "r") as f:
@@ -160,9 +152,7 @@ def load_item_text(meta_path):
     return asin2text
 
 
-# ==================================
 # 3. Ollama /api/generate Call
-# ==================================
 def call_ollama(model, host, base_prompt, user_input):
     """
     Sends a single prompt to Ollama and extracts only the JSON output.
@@ -197,9 +187,7 @@ def call_ollama(model, host, base_prompt, user_input):
     }
 
 
-# ==================================
 # 4. Main Pipeline
-# ==================================
 def main():
     # Load user interaction sequences (raw IDs) for each domain
     domain_user_seq_raw = {}
