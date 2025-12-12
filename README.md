@@ -23,7 +23,7 @@ Online User Cold-Start Recommendation with Popularity-Aware Learning
    1) inter_cdr(CDR)
    - Ours Model evaluation (same user index, respective item index for each domain) 
    3) lgn_cdr(train/valid/test split to use LightGCN as CDR method)
-   - Same user index, unified item index 0~35,001 (Electronics) 35,002~76,139 (Home and Kitchen)
+   - Same user index, unified item index 0~35,001 (Electronics) / 35,002~76,139 (Home and Kitchen)
   
 
 ## Backbone Model
