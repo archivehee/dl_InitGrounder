@@ -20,8 +20,10 @@ Online User Cold-Start Recommendation with Popularity-Aware Learning
 1. overlapped user 3,000 selection - data/amazon/overlap_usr_selec.py (output: f_usr_id.json)
 2. filtered interaction & item meta data generation -  data/amazon/rev_itm_sample.py
 3. Datasplit ->
-   1) inter_cdr(CDR) : Ours Model evaluation (same user index, respective item index for each domain) 
-   2) lgn_cdr(train/valid/test split to use LightGCN as CDR method) : Same user index, unified item index 0~35,001(Electronics)35,002~76,139(Home)
+   1) inter_cdr(CDR)
+   - Ours Model evaluation (same user index, respective item index for each domain) 
+   3) lgn_cdr(train/valid/test split to use LightGCN as CDR method)
+   - Same user index, unified item index 0~35,001(Electronics)35,002~76,139(Home)
   
 
 ## Backbone Model
